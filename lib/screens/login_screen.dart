@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/screens/signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
+  static final String id = 'login_screen';
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -9,10 +12,13 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   String _email, _password;
 
-  _submit(){
-    
+  _submit() {
+    if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();
+      print(_email);
+      print(_password);
+    }
   }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -59,14 +65,33 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: 250.0,
                     child: FlatButton(
                       onPressed: _submit,
-                      textColor: Colors.blue,
+                      color: Colors.blue,
                       padding: EdgeInsets.all(10.0),
                       child: Text(
                         'Login',
-                        style: TextStyle(color: Colors.white, fontSize: 18.0),
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18.0,
+                        ),
                       ),
                     ),
-                  )
+                  ),
+                  SizedBox(height: 20.0),
+                  Container(
+                    width: 250.0,
+                    child: FlatButton(
+                      onPressed: () => Navigator.pushNamed(context, SignupScreen.id),
+                      color: Colors.blue,
+                      padding: EdgeInsets.all(10.0),
+                      child: Text(
+                        'Go To Signup',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18.0,
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             )
