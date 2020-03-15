@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Instagram Clone',
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: _getScreenId(),
       routes: {
         LoginScreen.id : (context) => LoginScreen(),
         SignupScreen.id : (context) => SignupScreen(),
@@ -37,4 +37,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
