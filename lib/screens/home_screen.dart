@@ -39,6 +39,8 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
+
+      
       body: PageView(
         controller: _pageController,
         children: <Widget>[
@@ -54,6 +56,8 @@ class _HomeScreenState extends State<HomeScreen> {
           });
         },
       ),
+
+
       bottomNavigationBar: CupertinoTabBar(
         currentIndex: _currentTab,
         onTap: (int index) {
