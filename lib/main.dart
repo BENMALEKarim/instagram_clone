@@ -9,6 +9,7 @@ void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application
+
     Widget _getScreenId() {
     return StreamBuilder<FirebaseUser>(
       stream: FirebaseAuth.instance.onAuthStateChanged,
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
       routes: {
         LoginScreen.id : (context) => LoginScreen(),
         SignupScreen.id : (context) => SignupScreen(),
+        FeedScreen.id : (context) => FeedScreen(),
       },
     );
   }
