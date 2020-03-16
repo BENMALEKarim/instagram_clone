@@ -69,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
           });
           _pageController.animateToPage(
             index,
-            duration: Duration(milliseconds: 200),
+            duration: Duration(milliseconds: 50),
             curve: Curves.easeIn,
           );
         },

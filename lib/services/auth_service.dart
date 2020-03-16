@@ -24,8 +24,8 @@ class AuthService {
           'profileImageUrl': '',
         });
         //Provider.of<UserData>(context).currentUserId = signedInUser.uid;
-        //Navigator.pop(context);
-        Navigator.pushReplacementNamed(context, FeedScreen.id);
+        Navigator.pop(context);
+        //Navigator.pushReplacementNamed(context, FeedScreen.id);
       }
     } catch (e) {
       print(e);

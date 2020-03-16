@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         if (snapshot.hasData) {
           print(snapshot.data);
           //Provider.of<UserData>(context).currentUserId = snapshot.data.uid;
-          return HomeScreen();
+          return HomeScreen(userId: snapshot.data.uid);
         } else {
           return LoginScreen();
         }

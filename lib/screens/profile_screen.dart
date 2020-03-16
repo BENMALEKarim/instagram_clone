@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/screens/edit_profile_screen.dart';
 import 'package:instagram_clone/utiities/constants.dart';
+import 'package:instagram_clone/models/user_model.dart';
 
 class ProfileScreen extends StatefulWidget {
   final String userId;
@@ -17,7 +19,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
         body: FutureBuilder(
           future: userRef.document(widget.userId).get(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (!snapshot.hasData) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
             //print(snapshot.data['name']);
+            User user = User.fromDoc(snapshot.data);
             return ListView(
               children: <Widget>[
                 Padding(
@@ -90,7 +98,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             Container(
                               width: 200.0,
                               child: FlatButton(
-                                onPressed: () => print('La sauce'),
+                                onPressed: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => EditProfileScreen(user: user,))),
                                 color: Colors.blue,
                                 textColor: Colors.white,
                                 child: Text(
@@ -114,7 +125,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        'Username',
+                        user.name,
                         style: TextStyle(
                           fontSize: 18.0,
                           fontWeight: FontWeight.bold,
@@ -122,9 +133,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       SizedBox(height: 5.0),
                       Container(
-                        width: 80.0,
+                        width: 300.0,
                         child: Text(
-                          'bio',
+                          user.bio,
                           style:
                               TextStyle(color: Colors.black54, fontSize: 15.0),
                         ),
