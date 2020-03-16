@@ -13,7 +13,7 @@ class _FeedScreenState extends State<FeedScreen> {
     return Scaffold(
       body: Center(
         child: FlatButton(
-          onPressed: () => AuthService.logout(context),
+          onPressed: () => AuthService.logout(),
           child: Text('LOGOUT'),
         ),
       ),      

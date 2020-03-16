@@ -17,31 +17,28 @@ class AuthService {
         password: password,
       );
       FirebaseUser signedInUser = authResult.user;
-
-      if (signedInUser != null){
+      if (signedInUser != null) {
         _firestore.collection('/users').document(signedInUser.uid).setData({
           'name': name,
           'email': email,
           'profileImageUrl': '',
         });
-        Navigator.pushReplacementNamed(context, HomeScreen.id);
+        //Provider.of<UserData>(context).currentUserId = signedInUser.uid;
+        //Navigator.pop(context);
+        Navigator.pushReplacementNamed(context, FeedScreen.id);
       }
-
-
     } catch (e) {
       print(e);
     }
   }
 
-  static void logout(BuildContext context){
+  static void logout() {
     _auth.signOut();
-    Navigator.pushReplacementNamed(context, LoginScreen.id);
   }
 
-  static void login(BuildContext context,String email, String password) async {
+  static void login(String email, String password) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
-      Navigator.pushReplacementNamed(context, HomeScreen.id);    
     } catch (e) {
       print(e);
     }
