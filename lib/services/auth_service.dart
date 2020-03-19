@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:instagram_clone/screens/feed_screen.dart';
 import 'package:instagram_clone/screens/home_screen.dart';
 import 'package:instagram_clone/screens/login_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:instagram_clone/models/user_data.dart';
 
 class AuthService {
   static final _auth = FirebaseAuth.instance;
@@ -23,9 +25,8 @@ class AuthService {
           'email': email,
           'profileImageUrl': '',
         });
-        //Provider.of<UserData>(context).currentUserId = signedInUser.uid;
+        Provider.of<UserData>(context).currentUserId = signedInUser.uid;
         Navigator.pop(context);
-        //Navigator.pushReplacementNamed(context, FeedScreen.id);
       }
     } catch (e) {
       print(e);

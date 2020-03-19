@@ -33,6 +33,14 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
+  _clearSearch() {
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => _searchController.clear());
+    setState(() {
+      _users = null;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,39 +57,45 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             suffixIcon: IconButton(
               icon: Icon(Icons.clear),
-              onPressed: () => print('clear'),
+              onPressed: _clearSearch,
             ),
             filled: true,
           ),
           onSubmitted: (input) {
-            setState(() {
-              _users = DatabaseService.searchUser(input);
-            });
+            if (input.isNotEmpty) {
+              setState(() {
+                _users = DatabaseService.searchUser(input);
+              });
+            }
           },
         ),
       ),
-      body: FutureBuilder(
-        future: _users,
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          if (snapshot.data.documents.length == 0) {
-            return Center(
-              child: Text('No users found'),
-            );
-          }
-          return ListView.builder(
-            itemCount: snapshot.data.documents.length,
-            itemBuilder: (BuildContext context, int index) {
-              User user = User.fromDoc(snapshot.data.documents[index]);
-              return _buildUserTile(user);
-            },
-          );
-        },
-      ),
+      body: _users == null
+          ? Center(
+              child: Text('Search for a user'),
+            )
+          : FutureBuilder(
+              future: _users,
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                if (snapshot.data.documents.length == 0) {
+                  return Center(
+                    child: Text('No users found'),
+                  );
+                }
+                return ListView.builder(
+                  itemCount: snapshot.data.documents.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    User user = User.fromDoc(snapshot.data.documents[index]);
+                    return _buildUserTile(user);
+                  },
+                );
+              },
+            ),
     );
   }
 }
