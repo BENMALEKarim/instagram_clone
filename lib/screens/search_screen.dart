@@ -1,4 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/models/user_model.dart';
+import 'package:instagram_clone/screens/profile_screen.dart';
+import 'package:instagram_clone/services/database_service.dart';
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -7,6 +12,27 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   TextEditingController _searchController = TextEditingController();
+  Future<QuerySnapshot> _users;
+
+  _buildUserTile(User user) {
+    return ListTile(
+      leading: CircleAvatar(
+        radius: 20.0,
+        backgroundImage: user.profileImageUrl.isEmpty
+            ? AssetImage('assets/images/user_placeholder.jpg')
+            : CachedNetworkImageProvider(user.profileImageUrl),
+      ),
+      title: Text(user.name),
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (_) => ProfileScreen(
+                  userId: user.id,
+                )),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,11 +51,36 @@ class _SearchScreenState extends State<SearchScreen> {
               icon: Icon(Icons.clear),
               onPressed: () => print('clear'),
             ),
+            filled: true,
           ),
+          onSubmitted: (input) {
+            setState(() {
+              _users = DatabaseService.searchUser(input);
+            });
+          },
         ),
       ),
-      body: Center(
-        child: Text('SearchScreen'),
+      body: FutureBuilder(
+        future: _users,
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          if (snapshot.data.documents.length == 0) {
+            return Center(
+              child: Text('No users found'),
+            );
+          }
+          return ListView.builder(
+            itemCount: snapshot.data.documents.length,
+            itemBuilder: (BuildContext context, int index) {
+              User user = User.fromDoc(snapshot.data.documents[index]);
+              return _buildUserTile(user);
+            },
+          );
+        },
       ),
     );
   }
