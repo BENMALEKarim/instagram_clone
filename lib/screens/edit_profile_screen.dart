@@ -95,12 +95,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Center(
-          child: Text(
-            'Edit Profile',
-            style: TextStyle(
-              color: Colors.black,
-            ),
+        title: Text(
+          'Edit Profile',
+          style: TextStyle(
+            color: Colors.black,
           ),
         ),
       ),
@@ -114,79 +112,78 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     valueColor: AlwaysStoppedAnimation(Colors.blue),
                   )
                 : SizedBox.shrink(),
-                
-                Padding(
-                    padding: EdgeInsets.all(30.0),
-                    child: Form(
-                      key: _formKey,
-                      child: Column(
-                        children: <Widget>[
-                          CircleAvatar(
-                            radius: 60.0,
-                            backgroundColor: Colors.grey,
-                            backgroundImage: _displayProfileImage(),
-                          ),
-                          FlatButton(
-                            onPressed: _handleImageFromGallery,
-                            color: Colors.blue,
-                            textColor: Colors.white,
-                            child: Text(
-                              'Change Profile Image',
-                              style: TextStyle(
-                                fontSize: 18.0,
-                              ),
-                            ),
-                          ),
-                          TextFormField(
-                            initialValue: _name,
-                            style: TextStyle(fontSize: 16.0),
-                            decoration: InputDecoration(
-                              icon: Icon(
-                                Icons.person,
-                                size: 30.0,
-                              ),
-                              labelText: 'Name',
-                            ),
-                            validator: (input) => input.trim().length < 1
-                                ? 'Please enter a valid name'
-                                : null,
-                            onSaved: (input) => _name = input,
-                          ),
-                          TextFormField(
-                            initialValue: _bio,
-                            style: TextStyle(fontSize: 16.0),
-                            decoration: InputDecoration(
-                              icon: Icon(
-                                Icons.book,
-                                size: 30.0,
-                              ),
-                              labelText: 'Bio',
-                            ),
-                            validator: (input) => input.trim().length > 150
-                                ? 'Please enter a less bio'
-                                : null,
-                            onSaved: (input) => _bio = input,
-                          ),
-                          Container(
-                            margin: EdgeInsets.all(40.0),
-                            height: 40.0,
-                            width: 250.0,
-                            child: FlatButton(
-                              onPressed: _submit,
-                              color: Colors.blue,
-                              textColor: Colors.white,
-                              child: Text(
-                                'Save changes',
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
+            Padding(
+              padding: EdgeInsets.all(30.0),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: <Widget>[
+                    CircleAvatar(
+                      radius: 60.0,
+                      backgroundColor: Colors.grey,
+                      backgroundImage: _displayProfileImage(),
+                    ),
+                    FlatButton(
+                      onPressed: _handleImageFromGallery,
+                      color: Colors.blue,
+                      textColor: Colors.white,
+                      child: Text(
+                        'Change Profile Image',
+                        style: TextStyle(
+                          fontSize: 18.0,
+                        ),
                       ),
                     ),
-                  ),
+                    TextFormField(
+                      initialValue: _name,
+                      style: TextStyle(fontSize: 16.0),
+                      decoration: InputDecoration(
+                        icon: Icon(
+                          Icons.person,
+                          size: 30.0,
+                        ),
+                        labelText: 'Name',
+                      ),
+                      validator: (input) => input.trim().length < 1
+                          ? 'Please enter a valid name'
+                          : null,
+                      onSaved: (input) => _name = input,
+                    ),
+                    TextFormField(
+                      initialValue: _bio,
+                      style: TextStyle(fontSize: 16.0),
+                      decoration: InputDecoration(
+                        icon: Icon(
+                          Icons.book,
+                          size: 30.0,
+                        ),
+                        labelText: 'Bio',
+                      ),
+                      validator: (input) => input.trim().length > 150
+                          ? 'Please enter a less bio'
+                          : null,
+                      onSaved: (input) => _bio = input,
+                    ),
+                    Container(
+                      margin: EdgeInsets.all(40.0),
+                      height: 40.0,
+                      width: 250.0,
+                      child: FlatButton(
+                        onPressed: _submit,
+                        color: Colors.blue,
+                        textColor: Colors.white,
+                        child: Text(
+                          'Save changes',
+                          style: TextStyle(
+                            fontSize: 16.0,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),

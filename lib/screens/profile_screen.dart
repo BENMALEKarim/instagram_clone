@@ -43,7 +43,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             return ListView(
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 0),
+                  padding: EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 0),
                   child: Row(
                     children: <Widget>[
                       CircleAvatar(
