@@ -5,7 +5,7 @@ import 'package:instagram_clone/utiities/constants.dart';
 
 class DatabaseService {
   static void updateUser(User user) {
-    userRef.document(user.id).updateData({
+    usersRef.document(user.id).updateData({
       'name': user.name,
       'bio': user.bio,
       'profileImageUrl': user.profileImageUrl,
@@ -14,11 +14,11 @@ class DatabaseService {
 
   static Future<QuerySnapshot> searchUser(String name) {
     Future<QuerySnapshot> users =
-        userRef.where('name', isGreaterThanOrEqualTo: name).getDocuments();
+        usersRef.where('name', isGreaterThanOrEqualTo: name).getDocuments();
         return users;
   }
 
-    static void createPost(Post post) {
+  static void createPost(Post post) {
     postsRef.document(post.authorId).collection('userPosts').add({
       'imageUrl': post.imageUrl,
       'caption': post.caption,

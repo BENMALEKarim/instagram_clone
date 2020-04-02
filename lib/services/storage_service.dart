@@ -37,7 +37,8 @@ class StorageService {
     return compressedImage;
   }
 
-    static Future<String> uploadPost(File imageFile) async {
+
+  static Future<String> uploadPost(File imageFile) async {
     String photoId = Uuid().v4();
     File image = await compressImage(photoId, imageFile);
     StorageUploadTask uploadTask = storageRef
