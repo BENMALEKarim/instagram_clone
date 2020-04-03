@@ -96,7 +96,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
           style: TextStyle(
             color: Colors.black,
             fontFamily: 'Billabong',
-            fontSize: 35.0,
+            fontSize: 30.0,
           ),
         ),
       ),
