@@ -147,7 +147,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Column(
       children: <Widget>[
         Padding(
-          padding: EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 0.0),
+          padding: EdgeInsets.fromLTRB(25.0, 25.0, 25.0, 0.0),
           child: Row(
             children: <Widget>[
               CircleAvatar(
@@ -218,7 +218,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         ),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
+          padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 12.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -336,7 +336,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           style: TextStyle(
             color: Colors.black,
             fontFamily: 'Billabong',
-            fontSize: 35.0,
+            fontSize: 30.0,
           ),
         ),
         actions: <Widget>[
